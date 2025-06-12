@@ -7,7 +7,8 @@ import org.apache.log4j.Logger;
 import com.empresa.struts.dao.DaoFactory;
 import com.empresa.struts.dao.IDaoService;
 import com.empresa.struts.models.Request;
-import com.opensymphony.xwork2.ActionSupport;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * Store the request to a new institution or branch
@@ -15,7 +16,8 @@ import com.opensymphony.xwork2.ActionSupport;
  * @author joseluis
  *
  */
-public class RequestAction extends ActionSupport {
+@RestController
+public class RequestAction {
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -36,7 +38,8 @@ public class RequestAction extends ActionSupport {
 	/**
 	 * Execute the saverequest action
 	 */
-	public String execute() throws Exception {
+	@PostMapping("/execute")
+	public ResponseEntity<String> execute(@RequestBody ModelObject obj) throws Exception {
 		// Validate if requestBean have information
 		if (requestBean != null) {
 			// Initialize the dao factory used to get the data access layer
@@ -72,7 +75,7 @@ public class RequestAction extends ActionSupport {
 				return saveRequest(requestBean);
 			}
 		}
-		return SUCCESS;
+		return ResponseEntity.status(HttpStatus.OK).body("SUCCESS");;
 	}
 
 	/**
@@ -100,7 +103,7 @@ public class RequestAction extends ActionSupport {
 			logger.error("Error saving request");
 			return INPUT;
 		}
-		return SUCCESS;
+		return ResponseEntity.status(HttpStatus.OK).body("SUCCESS");;
 	}
 
 	/**

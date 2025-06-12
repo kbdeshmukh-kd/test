@@ -7,7 +7,8 @@ import java.util.Map;
 import com.empresa.struts.dao.DaoFactory;
 import com.empresa.struts.dao.IDaoService;
 import com.empresa.struts.models.Request;
-import com.opensymphony.xwork2.ActionSupport;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * Get a list of request that have information of institution or branch
@@ -15,7 +16,8 @@ import com.opensymphony.xwork2.ActionSupport;
  * @author joseluis
  *
  */
-public class ListRequestAction extends ActionSupport {
+@RestController
+public class ListRequestAction {
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -100,7 +102,8 @@ public class ListRequestAction extends ActionSupport {
 	/**
 	 * Execute the listrequest action
 	 */
-	public String execute() throws Exception {
+	@PostMapping("/execute")
+	public ResponseEntity<String> execute(@RequestBody ModelObject obj) throws Exception {
 		// Initialize the dao factory used to get the data access layer
 		DaoFactory daoFactory = DaoFactory.getSingletonInstance();
 		// Get the dao service to access to the information stored into a file
@@ -117,6 +120,6 @@ public class ListRequestAction extends ActionSupport {
 		} else {
 			listRequest = iDaoService.getAllAsList();
 		}
-		return SUCCESS;
+		return ResponseEntity.status(HttpStatus.OK).body("SUCCESS");;
 	}
 }

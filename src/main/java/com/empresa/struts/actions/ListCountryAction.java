@@ -4,7 +4,8 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
-import com.opensymphony.xwork2.ActionSupport;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * Get a list of countries
@@ -12,7 +13,8 @@ import com.opensymphony.xwork2.ActionSupport;
  * @author joseluis
  *
  */
-public class ListCountryAction extends ActionSupport {
+@RestController
+public class ListCountryAction {
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -23,10 +25,11 @@ public class ListCountryAction extends ActionSupport {
 	/**
 	 * Execute the listcountries action
 	 */
-	public String execute() throws Exception {
+	@PostMapping("/execute")
+	public ResponseEntity<String> execute(@RequestBody ModelObject obj) throws Exception {
 		// Get list of countries, passing the default location
 		mapCountries = getListOfCountries(Locale.getDefault());
-		return SUCCESS;
+		return ResponseEntity.status(HttpStatus.OK).body("SUCCESS");;
 	}
 
 	/**
