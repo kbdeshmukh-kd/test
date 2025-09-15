@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Register</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <h3>Request a new institution or branch</h3>
+
+    <div class="panel panel-default">
+        <div class="panel-body">
+            Please enter the institution as "Partner," the legal entity.<br>
+            The name of the institution should be in its official language.
+            (e.g. For CIAT: Centro Internacional de Agricultura Tropical)
+        </div>
+    </div>
+
+    <div id="formAlert" class="alert alert-danger" role="alert" style="display:none"></div>
+
+    <h4>
+        Is this institution a branch?
+        <button type="button" class="btn btn-default" id="buttonOK">Yes</button>
+        <button type="button" class="btn btn-default" id="buttonKO">No</button>
+        <span id="msg_branch" style="display:none" class="label label-warning">Indicate if it is a branch or not</span>
+    </h4>
+
+    <form id="requestForm" name="request">
+        <div class="form-group" id="div_institution" style="display:none">
+            <label for="institution">Select institution headquarter:*</label>
+            <select class="form-control" id="institution" name="institution">
+                <option value="">Select an option...</option>
+            </select>
+            <span id="msg_institution" style="display:none" class="label label-warning">Select one institution</span>
+        </div>
+        <input type="hidden" id="headquarter" name="headquarter">
+        <div class="form-group">
+            <label for="acronym">Acronym:</label>
+            <div class="input-group">
+                <input type="text" class="form-control" id="acronym" name="acronym" placeholder="Acronym">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+            </div>
+            <span id="msg_acronym" style="display:none" class="label label-warning">It must be less than 10 characters</span>
+        </div>
+        <div class="form-group">
+            <label for="name">Name:*</label>
+            <input type="text" class="form-control" id="name" name="name" placeholder="Name">
+            <span id="msg_name" style="display:none" class="label label-warning">It must be less than 10 words</span>
+        </div>
+        <div class="form-group">
+            <label for="type">Type:*</label>
+            <select class="form-control" id="type" name="type">
+                <option value="">Select an option...</option>
+                <option value="Academic Institutions">Academic Institutions</option>
+                <option value="Donor">Donor</option>
+                <option value="Non-Governmental Organization">Non-Governmental Organization</option>
+                <option value="Research Institution">Research Institution</option>
+            </select>
+            <span id="msg_type" style="display:none" class="label label-warning">Select one type</span>
+        </div>
+        <div class="form-group">
+            <label for="country">Country:*</label>
+            <select class="form-control" id="country" name="country">
+                <option value="">Select an option...</option>
+            </select>
+            <span id="msg_country" style="display:none" class="label label-warning">Select one country</span>
+        </div>
+        <div class="form-group">
+            <label for="city">City:*</label>
+            <input type="text" class="form-control" id="city" name="city" placeholder="City">
+            <span id="msg_city" style="display:none" class="label label-warning">Indicate one city</span>
+        </div>
+        <div class="form-group">
+            <label for="website">If you know the partner website please paste the link below:</label>
+            <input type="text" class="form-control" id="website" name="website" placeholder="Website">
+            <span id="msg_website" style="display:none" class="label label-warning">The URL must start with http or https</span>
+        </div>
+        <button type="submit" class="btn btn-info">
+            <span class="glyphicon glyphicon-send" aria-hidden="true"></span>
+            Request add new partner
+        </button>
+    </form>
+</div>
+<script src="/js/request.js"></script>
+</body>
+</html>
